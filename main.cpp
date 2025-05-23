@@ -104,6 +104,10 @@ int main()
                     string make, model, id;
                     cout << "Enter car ID(number plate): ";
                     cin >> id;
+                    while(maintenanceLibrary.findVehicleWithId(id)){
+                        cout<<"Vehicle already exists!! Enter other Vehicle ID:";
+                        cin>>id;
+                    }
                     cin.ignore();
                     cout << "Make:";
                     getline(cin, make);
@@ -178,7 +182,6 @@ int main()
                 case 2:
                 {
                     string id;
-                    int i = 0;
                     if (maintenanceLibrary.getVehicle().size() == 0)
                     {
                         cout << "No vehicles added!!" << endl;
@@ -346,7 +349,7 @@ int main()
                     else
                     {
                         maintenanceLibrary.removeMaintenanceTask(toDelete);
-                        cout << "Task Removed!!";
+                        cout << "Task Removed!!"<<endl;
                     }
                     break;
                 }
@@ -389,8 +392,12 @@ int main()
                         MaintenanceTask *m = maintenanceLibrary.isValidTask(id, taskId);
                         if (m != nullptr)
                         {
-                            maintenanceLibrary.addMaintenanceTask(id, *m);
-                            cout << "Task Added" << endl;
+                            if(maintenanceLibrary.isTaskAdded(id, taskId)){
+                                cout<<"Task Already added!!"<<endl;
+                            }else{
+                                maintenanceLibrary.addMaintenanceTask(id, *m);
+                                cout << "Task Added" << endl;
+                            }
                         }
                         else
                         {
@@ -454,6 +461,7 @@ int main()
                         cin >> taskId;
                     }
                     maintenanceLibrary.removeTask(id,taskId);
+                    cout<<"Task Deleted!!"<<endl;
                     break;
                 }
                 }

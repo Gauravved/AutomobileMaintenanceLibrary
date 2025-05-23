@@ -52,10 +52,11 @@ class MaintenanceLibrary{
                 return e->getId() == id;
             });
             if(it != vehicle.end()){
-                delete *it;
+                //delete *it;
                 vehicle.erase(it);
                 return true;
             }
+            tasks.erase(id);
             return false;
         }
         void addTask(MaintenanceTask* t){
@@ -121,5 +122,12 @@ class MaintenanceLibrary{
             return nullptr;
         }
 
-        
+        bool isTaskAdded(string id, int taskId){
+            for(auto i: tasks[id]){
+                if(taskId == i.getId()){
+                    return true;
+                }
+            }
+            return false;
+        }
 };
