@@ -1,5 +1,5 @@
 #include <iostream>
-#include "maintenanceLibrary.h"
+#include "../include/maintenanceLibrary.h"
 #include <typeinfo>
 using namespace std;
 void displayTask(MaintenanceLibrary maintenanceLibrary)
@@ -118,16 +118,30 @@ int main()
                     cout << "Year (of model):";
                     cin >> year;
                     CarType type;
+                    int crtype;
                     cout << "1> HatchBag \n2> Sedan \n3> SUV \nEnter car type:";
-                    cin >> type;
+                    cin >> crtype;
+                    while(crtype>3 || crtype<1){
+                        cout<<"Please enter valid type:";
+                        cin>>crtype;
+                    }
+                    type = static_cast<CarType>(crtype);
                     switch (carType)
                     {
                     case 1:
                         float batteryCapacity, batteryLevel;
                         cout << "Enter Battery Capacity:";
                         cin >> batteryCapacity;
+                        while(batteryCapacity<=0){
+                            cout<<"Battery Capacity cannot be lower than 0:";
+                            cin>>batteryCapacity;
+                        }
                         cout << "Enter Battery Level:";
                         cin >> batteryLevel;
+                        while(batteryLevel>batteryCapacity || batteryLevel<=0){
+                            cout<<"Battery Level cannot be greater than batteryCapacity or lower than 0: ";
+                            cin>>batteryLevel;
+                        }
                         vehicle = new ElectricCar(id, make, model, odometer, year, type, batteryCapacity, batteryLevel);
                         break;
                     case 2:
@@ -135,8 +149,14 @@ int main()
                         GasType gt;
                         cout << "Enter Cylinder Size:";
                         cin >> cylinderSize;
+                        int gtype;
                         cout << "\n\t1> CNG \n\t2> Premium \n\t3> E85 \nEnter Gas Type: ";
-                        cin >> gt;
+                        cin >> gtype;
+                        while(gtype>3 || gtype<1){
+                            cout<<"Please enter valid type:";
+                            cin>>gtype;
+                        }
+                        gt = static_cast<GasType>(gtype);
                         vehicle = new GasCar(id, make, model, odometer, year, type, cylinderSize, gt);
                         break;
                     case 3:
@@ -147,8 +167,14 @@ int main()
                         cin >> tankSize;
                         cout << "Is cold start assist feature present? (1- Yes , 0- No):";
                         cin >> coldStart;
+                        int etype;
                         cout << "\n\t1> BS6 \n\t2> Euro6 \n\t3> China6 \n\t4> Californial EV \nEnter your emission standard:";
-                        cin >> est;
+                        cin >> etype;
+                        while(etype>4 || etype<1){
+                            cout<<"Please enter valid type:";
+                            cin>>etype;
+                        }
+                        est = static_cast<EmissionStandard>(etype);
                         vehicle = new DieselCar(id, make, model, odometer, year, type, tankSize, coldStart, est);
                         break;
                     case 4:
@@ -157,7 +183,12 @@ int main()
                         cout << "Enter Cylinder Size:";
                         cin >> cylinderSize;
                         cout << "\n\t1> CNG \n\t2> Premium \n\t3> E85 \nEnter Gas Type: ";
-                        cin >> gt;
+                        cin >> gtype;
+                        while(gtype>3 || gtype<1){
+                            cout<<"Please enter valid type:";
+                            cin>>gtype;
+                        }
+                        gt = static_cast<GasType>(gtype);
                         // bool coldStart, isSwitchable;
                         // float tankSize;
                         // EmissionStandard est;
@@ -167,7 +198,12 @@ int main()
                         cout << "Is cold start assist feature present? (1- Yes , 0- No):";
                         cin >> coldStart;
                         cout << "\n\t1> BS6 \n\t2> Euro6 \n\t3> China6 \n\t4> Californial EV \nEnter your emission standard:";
-                        cin >> est;
+                        cin >> etype;
+                        while(etype>4 || etype<1){
+                            cout<<"Please enter valid type:";
+                            cin>>etype;
+                        }
+                        est = static_cast<EmissionStandard>(etype);
                         cout << "Is it switchable? (1- Yes, 0- No):";
                         cin >> isSwitchable;
                         vehicle = new HybridCar(id, make, model, odometer, year, type, cylinderSize, gt, tankSize, coldStart, est, isSwitchable);

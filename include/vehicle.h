@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 using namespace std;
 enum Type{
     ELECTRIC=1,
@@ -26,10 +27,10 @@ istream& operator>>(istream& in, Type& type) {
     int value;
     in >> value;
     switch (value) {
-        case 1: type = ELECTRIC; break;
-        case 2: type = GAS; break;
-        case 3: type = DIESEL; break;
-        case 4: type = HYBRID; break;
+        case 1: type = static_cast<Type>(ELECTRIC); break;
+        case 2: type = static_cast<Type>(GAS); break;
+        case 3: type = static_cast<Type>(DIESEL); break;
+        case 4: type = static_cast<Type>(HYBRID); break;
         default:
             in.setstate(ios::failbit); // mark input as failed
             break;
@@ -40,9 +41,9 @@ istream& operator>>(istream& in, CarType& type) {
     int value;
     in >> value;
     switch (value) {
-        case 1: type = HATCHBAG; break;
-        case 2: type = SEDAN; break;
-        case 3: type = SUV; break;
+        case 1: type = static_cast<CarType>(HATCHBAG); break;
+        case 2: type = static_cast<CarType>(SEDAN); break;
+        case 3: type = static_cast<CarType>(SUV); break;
         default:
             in.setstate(ios::failbit); // mark input as failed
             break;
@@ -53,9 +54,9 @@ istream& operator>>(istream& in, GasType& type) {
     int value;
     in >> value;
     switch (value) {
-        case 1: type = CNG; break;
-        case 2: type = PREMIUM; break;
-        case 3: type = E85; break;
+        case 1: type = static_cast<GasType>(CNG); break;
+        case 2: type = static_cast<GasType>(PREMIUM); break;
+        case 3: type = static_cast<GasType>(E85); break;
         default:
             in.setstate(ios::failbit); // mark input as failed
             break;
@@ -66,10 +67,10 @@ istream& operator>>(istream& in, EmissionStandard& type) {
     int value;
     in >> value;
     switch (value) {
-        case 1: type = BS6; break;
-        case 2: type = Euro6; break;
-        case 3: type = China6; break;
-        case 4: type = CALIFORNIALEV; break;
+        case 1: type = static_cast<EmissionStandard>(BS6); break;
+        case 2: type = static_cast<EmissionStandard>(Euro6); break;
+        case 3: type = static_cast<EmissionStandard>(China6); break;
+        case 4: type = static_cast<EmissionStandard>(CALIFORNIALEV); break;
         default:
             in.setstate(ios::failbit); // mark input as failed
             break;
