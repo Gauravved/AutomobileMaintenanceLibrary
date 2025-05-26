@@ -464,3 +464,11 @@ int main()
 
     return 0;
 }
+
+/*
+# In the root folder
+mkdir build
+cd build
+cmake ..
+make
+*/
